@@ -6,19 +6,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @other_user = users(:archer)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get signup_path
     assert_response :success
   end
 
-  test "should redirect edit when not logged in" do
+  test 'should redirect edit when not logged in' do
     log_in_as(@other_user)
     get edit_user_path(@user)
     assert flash.empty?
     assert_redirected_to root_url
   end
 
-  test "should redirect update when not logged in" do
+  test 'should redirect update when not logged in' do
     log_in_as(@other_user)
     patch user_path(@user), params: { user: { name: @user.name,
                                               email: @user.email } }
@@ -26,19 +26,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
-  test "should redirect index when not logged in" do
+  test 'should redirect index when not logged in' do
     get users_path
     assert_redirected_to login_url
   end
 
-  test "should redirect destroy when not logged in" do
+  test 'should redirect destroy when not logged in' do
     assert_no_difference 'User.count' do
       delete user_path(@user)
     end
     assert_redirected_to login_url
   end
 
-  test "should redirect destroy when logged in as a non-admin" do
+  test 'should redirect destroy when logged in as a non-admin' do
     log_in_as(@other_user)
     assert_no_difference 'User.count' do
       delete user_path(@user)
@@ -46,12 +46,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
-  test "should redirect following when not logged in" do
+  test 'should redirect following when not logged in' do
     get following_user_path(@user)
     assert_redirected_to login_url
   end
 
-  test "should redirect followers when not logged in" do
+  test 'should redirect followers when not logged in' do
     get followers_user_path(@user)
     assert_redirected_to login_url
   end
