@@ -11,9 +11,10 @@
 
     <%= f.label :password_confirmation, "Confirmation" %>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
+
     <%= f.label :private, class: "checkbox inline" do %>
-        <%= f.check_box :private %>
-        <span>Private ?</span>
+        <%= f.check_box :private, data: {toggle: 'toggle'} %>
+        <span>Private?</span>
     <% end %>
     <% if logged_in? %>
       <%= f.submit "Update my account", class: "btn btn-primary" %>
