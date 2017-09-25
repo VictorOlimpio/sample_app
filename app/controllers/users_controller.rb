@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    @microposts = visible_microposts(@user)
   end
 
   def create
@@ -59,11 +59,18 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def visible_microposts(other_user)
+    if !other_user.private? || current_user.following?(other_user) ||
+        other_user == current_user
+      other_user.microposts.paginate(page: params[:page])
+    end
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
+                                 :password_confirmation, :private)
   end
 
   # Confirms the correct user.

@@ -8,6 +8,14 @@ class User < ApplicationRecord
            foreign_key: 'followed_id', dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower,
            dependent: :destroy
+  has_many :active_solicitations, class_name: 'Solicitation',
+           foreign_key: 'follower_id', dependent: :destroy
+  has_many :passive_solicitations, class_name: 'Solicitation',
+           foreign_key: 'user_id', dependent: :destroy
+  has_many :solicitations_to_accept, through: :passive_solicitations,
+           source: :follower, dependent: :destroy
+  has_many :solicitations_pending, through: :active_solicitations,
+           source: :user, dependent: :destroy
 
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -105,6 +113,14 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def accept(other_user)
+    if solicitations_to_accept.include?(other_user)
+      solicitations_to_accept.find(other_user).accept = true
+      self.follow(other_user)
+      solicitations_to_accept.delete(other_user)
+    end
   end
 
   private
