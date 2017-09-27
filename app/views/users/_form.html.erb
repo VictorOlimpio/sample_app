@@ -17,8 +17,9 @@
         <span>Private?</span>
     <% end %>
     <% if logged_in? %>
-      <%= f.submit "Update my account", class: "btn btn-primary" %>
+        
+        <%= f.submit "Update my account", class: "btn btn-primary" %>
     <% else %>
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
+        <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
 <% end %>

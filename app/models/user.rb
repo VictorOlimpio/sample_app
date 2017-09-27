@@ -123,6 +123,12 @@ class User < ApplicationRecord
     end
   end
 
+  def make_solicitation(other_user)
+    if !solicitations_pending.include?(other_user)
+      solicitations_pending << other_user
+    end
+  end
+
   private
 
   # Converts email to all lower-case.
