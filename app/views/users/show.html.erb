@@ -10,6 +10,17 @@
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
+    <section class="row">
+      <div class="col-md-10">
+        <ul class="list-unstyled">
+          <li class="text-muted"><%=	@user.location %></li>
+          <li><%=	@user.description %></li>
+          <li><a href="<%=	@user.website_format %>" target="_blank">
+            <%=	@user.website %> </a></li>
+        </ul>
+      </div>
+
+    </section>
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in?%>

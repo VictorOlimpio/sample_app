@@ -14,7 +14,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = visible_microposts(@user)
+    #@microposts = visible_microposts(@user)
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def create
@@ -70,7 +71,8 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation, :private)
+                                 :password_confirmation, :private, :location,
+                                 :description, :website)
   end
 
   # Confirms the correct user.

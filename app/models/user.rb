@@ -33,6 +33,8 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :location, length: {maximum: 50 }
+  validates :description, length: {maximum: 255}
 
   # Returns the hash digest of the given string.
   def self.digest(string)
@@ -126,6 +128,14 @@ class User < ApplicationRecord
   def make_solicitation(other_user)
     if !solicitations_pending.include?(other_user)
       solicitations_pending << other_user
+    end
+  end
+
+  def website_format
+    if self.website
+      if !self.website.start_with?('http://')
+        self.website = "http://#{self.website}"
+      end
     end
   end
 
