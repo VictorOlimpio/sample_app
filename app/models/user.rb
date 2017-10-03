@@ -117,9 +117,12 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def cancel_solicitation(other_user)
+    solicitations_pending.delete(other_user)
+  end
+
   def accept(other_user)
     if solicitations_to_accept.include?(other_user)
-      solicitations_to_accept.find(other_user).accept = true
       self.follow(other_user)
       solicitations_to_accept.delete(other_user)
     end

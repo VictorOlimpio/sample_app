@@ -1,0 +1,9 @@
+<% current_user.passive_solicitations.each do |solicitation| %>
+<li class="list-group-item" style="min-width: 300px">
+  <%= link_to gravatar_for(solicitation.follower, size: 30),
+              solicitation.follower %>
+  <%= link_to "#{solicitation.follower.name} wants to folllow you.",
+              solicitation.follower %>
+  <%= render partial: "users/follow", locals: { user: solicitation.follower } %>
+</li>
+<% end %>

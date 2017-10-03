@@ -17,7 +17,7 @@ class SolicitationsController < ApplicationController
 
   def destroy
     @user = Solicitation.find(params[:id]).user
-    current_user.accept(@user)
+    current_user.cancel_solicitation(@user)
     respond_to do |format|
       format.html { redirect_to @user }
       format.js
