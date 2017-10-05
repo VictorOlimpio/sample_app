@@ -8,6 +8,7 @@ class SolicitationsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+    NotificationMailer.following_solicitation(@user, current_user).deliver_now
     current_user.make_solicitation(@user)
     respond_to do |format|
       format.html { redirect_to @user }

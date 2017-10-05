@@ -1,4 +1,2 @@
-var element = document.querySelector("#accepted<%= @user.id %>");
-element.value = "accepted";
-element.setAttribute("disabled", true);
+$("#accepted<%= @user.id %>").html('accepted').attr("disabled", true);
 $("#followers").html('<%= current_user.followers.count %>');
