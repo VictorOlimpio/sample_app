@@ -11,6 +11,23 @@
 
     <%= f.label :password_confirmation, "Confirmation" %>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
+    <% if logged_in? %>
+        <%= f.label :location %>
+        <%= f.text_field :location, class: 'form-control' %>
 
-    <%= f.submit "Create my account", class: "btn btn-primary" %>
+        <%= f.label :description %>
+        <%=	f.text_area :description, class: 'form-control' %>
+
+        <%=	f.label :website %>
+        <%=	f.text_field :website, class: 'form-control' %>
+    <% end %>
+    <%= f.label :private, class: "checkbox inline" do %>
+        <%= f.check_box :private, data: {toggle: 'toggle'} %>
+        <span>Private?</span>
+    <% end %>
+    <% if logged_in? %>
+        <%= f.submit "Update my account", class: "btn btn-primary" %>
+    <% else %>
+        <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <% end %>
 <% end %>

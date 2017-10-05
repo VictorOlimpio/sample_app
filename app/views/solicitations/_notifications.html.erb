@@ -1,0 +1,24 @@
+<% if current_user.passive_solicitations.any?  %>
+  <% current_user.passive_solicitations.each do |solicitation| %>
+
+        <li class="list-group-item media" style="min-width: 300px">
+          <div class="media-left">
+            <%= link_to gravatar_for(solicitation.follower, size: 70),
+                        solicitation.follower %>
+          </div>
+          <div class="media-body">
+            <%= link_to "#{solicitation.follower.name} wants to folllow you.",
+                        solicitation.follower %>
+            <%= render partial: "users/follow",
+                       locals: { user: solicitation.follower } %>
+          </div>
+
+
+        </li>
+
+  <% end %>
+<% else %>
+    <li class="list-group-item text-center" style="min-width: 300px">
+      No Notifications
+    </li>
+<% end %>
