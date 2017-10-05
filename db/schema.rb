@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 20170927175722) do
     t.boolean "accecpt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["follower_id"], name: "index_solicitations_on_follower_id"
+    t.index ["user_id", "follower_id"], name: "index_solicitations_on_user_id_and_follower_id", unique: true
+    t.index ["user_id"], name: "index_solicitations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

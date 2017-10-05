@@ -123,7 +123,7 @@ class User < ApplicationRecord
 
   def accept(other_user)
     if solicitations_to_accept.include?(other_user)
-      self.follow(other_user)
+      other_user.follow(self)
       solicitations_to_accept.delete(other_user)
     end
   end
