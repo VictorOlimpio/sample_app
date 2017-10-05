@@ -21,3 +21,6 @@
 /yarn-error.log
 
 .byebug_history
+
+#ignora os arquivos de configuração do rubymine
+.idea
